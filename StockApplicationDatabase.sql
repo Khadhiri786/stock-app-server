@@ -77,8 +77,10 @@ INSERT INTO Stocks VALUES(gen_random_uuid (),'HINDALCO INDUSTRIES','HINDALCO','H
 (gen_random_uuid (),'ICICI BANK','ICICIBANK','ICICIBANK',936,946,936.05,920,958.2,642.15,1,12319827,11418878051.49,932.95,921,-11.95,-1.28,'FII / FPI or Institutions increasing their shareholding','','Highest Recovery from 52 Week Low','Mutual Fund Holding decreased by 0.35% in the last quarter.',3,2.5,3,4),
 (gen_random_uuid (),'NESTLE INDIA','NESTLEIND','NESTLEIND',20385.15,20395.15,20450.65,20006.65,21050,16000,1,81680,1644650487.2,20388.3,20058,-330.3,-1.62,'Growth in Net Profit with increasing Profit Margin (QoQ)','an inadequate supply chain','Increasing sales and market share.','tight labor supply',2,2.5,3,3)
 select * from Stocks order by COALESCE(nooftimesviewed,0) desc ;
+
 Create table UserDetails (userId uuid,email varchar(250),password varchar (250));
 insert into UserDetails (userId,email,password) values (gen_random_uuid (),'khadhiri.abdul@kanini.com','admin');
-select * from UserDetails where email='khadhiri.abdul@kanini.com';
 
+select * from UserDetails;
+select * from UserDetails where email='khadhiri.abdul@kanini.com';
 select * from Stocks;
