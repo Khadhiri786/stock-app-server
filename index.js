@@ -4,7 +4,7 @@ const app = express();
 const port = 5000;
 const cors = require("cors");
 const pool = require("./db");
-
+const jwt = require('jsonwebtoken');
 app.use(cors());
 app.use(express.json());
 
@@ -59,10 +59,12 @@ app.post("/login", async (req, res) => {
       "select * from UserDetails where email = $1",
       [email]
     );
-    if (stocks?.rows?.[0]?.password === password) {
-      res.json(stocks);
+       if (stocks?.rows?.[0]?.password === password) {
+      const userData ={email:stocks?.rows?.[0].email,password:stocks?.rows?.[0]?.password,userid:stocks?.rows?.[0]?.userid};
+      const token= jwt.sign({userData},'my_secret_key');
+      res.json({token:token})
     } else {
-      res.json("Invalid Email or Password");
+      res.json({error:['Invalid Email or password']});
     }
   } catch (err) {
     console.error(err.message);
