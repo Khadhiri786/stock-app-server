@@ -8,6 +8,7 @@ const pool = require("./db");
 app.use(cors());
 app.use(express.json());
 
+
 app.get("/getSearchSuggestions", async (req, res) => {
   try {
     const allStockDetails = await pool.query("SELECT stockid,companyname,nselistedname FROM Stocks");
@@ -17,7 +18,6 @@ app.get("/getSearchSuggestions", async (req, res) => {
     console.error(err.message);
   }
 });
-
 
 // Get Particular stock information using stockId and increment the no of times viewed
 
@@ -34,6 +34,27 @@ app.get('/stock/:stockId',async (req,res)=>{
     }
 });
 
+// Get 5 trending stocks details
+app.get('/latestTrendingStocks',async(req,res)=>{
+  try {
+    const latestStocks = await pool.query("select * from Stocks order by COALESCE(nooftimesviewed,0) desc limit 5");
+    res.json(latestStocks?.rows);
+  }
+  catch (err) {
+    console.error(err.message);
+  }
+})
+
+app.post('/login',async (req,res)=>{
+  const {email,password} = req.body;
+  try {
+    const stocks = await pool.query("select * from UserDetails where email = $1",[email]);
+    res.json(stocks);
+  }
+  catch(err ){
+    console.error(err.message);
+  }
+})
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
 });
