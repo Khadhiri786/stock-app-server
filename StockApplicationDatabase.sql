@@ -79,7 +79,7 @@ INSERT INTO Stocks VALUES(gen_random_uuid (),'HINDALCO INDUSTRIES','HINDALCO','H
 select * from Stocks order by COALESCE(nooftimesviewed,0) desc ;
 
 Create table UserDetails (userId uuid,email varchar(250),password varchar (250));
-insert into UserDetails (userId,email,password) values (gen_random_uuid (),'khadhiri.abdul@kanini.com','admin');
+insert into UserDetails (userId,email,password) values (gen_random_uuid (),'khadhiri.abdul@kanini.com','Go live 928');
 
 select * from UserDetails;
 select * from UserDetails where email='khadhiri.abdul@kanini.com';
